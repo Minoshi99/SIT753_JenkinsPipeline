@@ -14,6 +14,16 @@ pipeline {
                 echo 'Stage 2: Unit and Integration Tests - Running unit tests with JUnit and integration tests with Selenium.'
                 echo 'Tools: JUnit (Unit Testing), Selenium (Integration Testing)'
             }
+            post {
+                always {
+                    emailext(
+                        subject: "Build ${currentBuild.fullDisplayName} - Unit and Integration Tests Stage",
+                        body: "The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}",
+                        to: "mino.menuranga@gmail.com",
+                        attachmentsPattern: '**/test-logs/*.log'
+                    )
+                }
+            }
         }
 
         stage('Code Analysis') {
@@ -27,6 +37,16 @@ pipeline {
             steps {
                 echo 'Stage 4: Security Scan - Performing security scans using OWASP ZAP to identify vulnerabilities.'
                 echo 'Tool: OWASP ZAP'
+            }
+            post {
+                always {
+                    emailext(
+                        subject: "Build ${currentBuild.fullDisplayName} - Security Scan Stage",
+                        body: "The Security Scan stage has completed with status: ${currentBuild.currentResult}",
+                        to: "mino.menuranga@gmail.com",
+                        attachmentsPattern: '**/security-logs/*.log'
+                    )
+                }
             }
         }
 
@@ -49,6 +69,24 @@ pipeline {
                 echo 'Stage 7: Deploy to Production - Deploying the application to an AWS EC2 instance for production.'
                 echo 'Tool: AWS CLI'
             }
+        }
+    }
+
+    post {
+        failure {
+            emailext(
+                subject: "Build ${currentBuild.fullDisplayName} - Failure",
+                body: "The build has failed. Please check the Jenkins logs for more details.",
+                to: "mino.menuranga@gmail.com",
+                attachmentsPattern: '**/build-logs/*.log'
+            )
+        }
+        success {
+            emailext(
+                subject: "Build ${currentBuild.fullDisplayName} - Success",
+                body: "The build has succeeded. All stages completed successfully.",
+                to: "mino.menuranga@gmail.com"
+            )
         }
     }
 }
