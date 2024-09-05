@@ -17,7 +17,7 @@ pipeline {
             post {
                 always {
                     echo 'Sending email for Unit and Integration Tests...'
-                    emailtext (
+                    emailext(
                         subject: "Build ${currentBuild.fullDisplayName} - Unit and Integration Tests Stage",
                         body: "The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}",
                         to: "mino.menuranga@gmail.com"
