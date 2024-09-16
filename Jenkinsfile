@@ -6,8 +6,8 @@ pipeline {
             steps {
                 echo 'Stage 1: Build - Building the code using Maven to compile and package the application.'
                 echo 'Tool: Maven'
-                // Simulating log generation for build stage
-                sh 'echo "Build log content" > build-logs/build.log'
+                // Simulating log generation for build stage on Windows
+                bat 'echo Build log content > build-logs\\build.log'
             }
         }
 
@@ -15,8 +15,8 @@ pipeline {
             steps {
                 echo 'Stage 2: Unit and Integration Tests - Running unit tests with JUnit and integration tests with Selenium.'
                 echo 'Tools: JUnit (Unit Testing), Selenium (Integration Testing)'
-                // Simulate log generation for tests
-                sh 'mkdir -p test-logs && echo "JUnit test log" > test-logs/test.log'
+                // Simulate log generation for tests on Windows
+                bat 'mkdir test-logs && echo JUnit test log > test-logs\\test.log'
             }
             post {
                 always {
@@ -35,8 +35,8 @@ pipeline {
             steps {
                 echo 'Stage 3: Code Analysis - Analyzing code quality using SonarQube to ensure industry standards are met.'
                 echo 'Tool: SonarQube'
-                // Simulate log generation for code analysis
-                sh 'echo "SonarQube log content" > analysis-logs/code-analysis.log'
+                // Simulate log generation for code analysis on Windows
+                bat 'echo SonarQube log content > analysis-logs\\code-analysis.log'
             }
         }
 
@@ -44,8 +44,8 @@ pipeline {
             steps {
                 echo 'Stage 4: Security Scan - Performing security scans using OWASP ZAP to identify vulnerabilities.'
                 echo 'Tool: OWASP ZAP'
-                // Simulate security scan log generation
-                sh 'mkdir -p security-logs && echo "OWASP ZAP log" > security-logs/security.log'
+                // Simulate security scan log generation on Windows
+                bat 'mkdir security-logs && echo OWASP ZAP log > security-logs\\security.log'
             }
             post {
                 always {
@@ -64,8 +64,8 @@ pipeline {
             steps {
                 echo 'Stage 5: Deploy to Staging - Deploying the application to an AWS EC2 instance for staging.'
                 echo 'Tool: AWS CLI'
-                // Simulate log generation for deployment
-                sh 'echo "Deploy to Staging log content" > deploy-logs/staging.log'
+                // Simulate log generation for deployment on Windows
+                bat 'echo Deploy to Staging log content > deploy-logs\\staging.log'
             }
         }
 
@@ -73,8 +73,8 @@ pipeline {
             steps {
                 echo 'Stage 6: Integration Tests on Staging - Running integration tests in the staging environment using Postman.'
                 echo 'Tool: Postman'
-                // Simulate log generation for integration tests on staging
-                sh 'echo "Postman test log" > test-logs/integration-staging.log'
+                // Simulate log generation for integration tests on staging on Windows
+                bat 'echo Postman test log > test-logs\\integration-staging.log'
             }
         }
 
@@ -82,8 +82,8 @@ pipeline {
             steps {
                 echo 'Stage 7: Deploy to Production - Deploying the application to an AWS EC2 instance for production.'
                 echo 'Tool: AWS CLI'
-                // Simulate log generation for production deployment
-                sh 'echo "Deploy to Production log content" > deploy-logs/production.log'
+                // Simulate log generation for production deployment on Windows
+                bat 'echo Deploy to Production log content > deploy-logs\\production.log'
             }
         }
     }
