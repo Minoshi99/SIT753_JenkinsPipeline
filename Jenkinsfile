@@ -20,7 +20,8 @@ pipeline {
                         subject: "Build ${currentBuild.fullDisplayName} - Unit and Integration Tests Stage",
                         body: "The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}",
                         to: "mino.menuranga@gmail.com",
-                        attachmentsPattern: '**/test-logs/*.log'
+                        attachmentsPattern: '**/test-logs/*.log',
+                        attachLog: true  // Attach the console log
                     )
                 }
             }
@@ -44,7 +45,8 @@ pipeline {
                         subject: "Build ${currentBuild.fullDisplayName} - Security Scan Stage",
                         body: "The Security Scan stage has completed with status: ${currentBuild.currentResult}",
                         to: "mino.menuranga@gmail.com",
-                        attachmentsPattern: '**/security-logs/*.log'
+                        attachmentsPattern: '**/security-logs/*.log',
+                        attachLog: true  // Attach the console log
                     )
                 }
             }
@@ -78,14 +80,16 @@ pipeline {
                 subject: "Build ${currentBuild.fullDisplayName} - Failure",
                 body: "The build has failed. Please check the Jenkins logs for more details.",
                 to: "mino.menuranga@gmail.com",
-                attachmentsPattern: '**/build-logs/*.log'
+                attachmentsPattern: '**/build-logs/*.log',
+                attachLog: true  // Attach the console log
             )
         }
         success {
             emailext(
                 subject: "Build ${currentBuild.fullDisplayName} - Success",
                 body: "The build has succeeded. All stages completed successfully.",
-                to: "mino.menuranga@gmail.com"
+                to: "mino.menuranga@gmail.com",
+                attachLog: true  // Attach the console log
             )
         }
     }
