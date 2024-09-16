@@ -21,7 +21,7 @@ pipeline {
                         body: "The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}",
                         to: "mino.menuranga@gmail.com",
                         attachmentsPattern: '**/test-logs/*.log',
-                        attachLog: true  // Attach the console log
+                        attachLog: true 
                     )
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
                         body: "The Security Scan stage has completed with status: ${currentBuild.currentResult}",
                         to: "mino.menuranga@gmail.com",
                         attachmentsPattern: '**/security-logs/*.log',
-                        attachLog: true  // Attach the console log
+                        attachLog: true 
                     )
                 }
             }
@@ -81,7 +81,7 @@ pipeline {
                 body: "The build has failed. Please check the Jenkins logs for more details.",
                 to: "mino.menuranga@gmail.com",
                 attachmentsPattern: '**/build-logs/*.log',
-                attachLog: true  // Attach the console log
+                attachLog: true 
             )
         }
         success {
@@ -89,7 +89,7 @@ pipeline {
                 subject: "Build ${currentBuild.fullDisplayName} - Success",
                 body: "The build has succeeded. All stages completed successfully.",
                 to: "mino.menuranga@gmail.com",
-                attachLog: true  // Attach the console log
+                attachLog: true 
             )
         }
     }
